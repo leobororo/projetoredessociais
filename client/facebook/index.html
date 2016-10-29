@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="AppRedesSociais">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Aplicativo redes sociais</title>
+
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/app.css" media="screen" title="no title">
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/controllers/redesSociaisCtrl.js"></script>
+    <script src="../js/services/contatoFacebookAPIService.js"></script>
+  </head>
+  
+  <body ng-controller="redesSociaisCtrl">
+    <div class="container jumbotron">
+      <h1 ng-bind="appName"></h1>
+
+      <div class="container-fluid">
+        <h3>Dados do Usuário</h3>
+        <div class="row">
+          <div class="col-sm-2">ID:</div>
+          <div class="col-sm-10">{{dadosUsuario.id}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">Nome:</div>
+          <div class="col-sm-10">{{dadosUsuario.nome}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">Email:</div>
+          <div class="col-sm-10">{{dadosUsuario.email}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">Cidade:</div>
+          <div class="col-sm-10">{{dadosUsuario.cidade}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">Genero:</div>
+          <div class="col-sm-10">{{dadosUsuario.genero}}</div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <h3>Lista de amigos</h3>
+        <div class="row" ng-repeat="amigo in amigos">
+          <div class="col-sm-3">Nome</div>
+          <div class="col-sm-3">{{amigo.nome}}</div>
+          <div class="col-sm-3">Idade</div>
+          <div class="col-sm-3">{{amigo.idade}}</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

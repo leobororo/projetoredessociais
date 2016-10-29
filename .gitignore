@@ -1,0 +1,7 @@
+node_modules
+bower_components
+client/components
+server/public/*
+server/bin/npm-debug.log
+build/*.js
+test/units.html

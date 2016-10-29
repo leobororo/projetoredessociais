@@ -1,0 +1,25 @@
+
+> AppRedesSociais@1.0.0 postinstall C:\Users\leobo\pos_graduacao\Redes Sociais\projeto
+> bower install && grunt deploy
+
+Running "copy:server" (copy) task
+Copied 2 files
+
+Running "copy:all" (copy) task
+Copied 8 files
+
+Running "concurrent:target" (concurrent) task
+    [4mRunning "watch" task[24m
+    [4mRunning "nodemon:dev" (nodemon) task[24m
+    Waiting...
+    [33m[nodemon] 1.11.0[39m
+    [33m[nodemon] to restart at any time, enter `rs`[39m
+    [33m[nodemon] watching: C:\Users\leobo\pos_graduacao\Redes Sociais\projeto\server/**/*[39m
+    [32m[nodemon] starting `node --debug server/bin/server.js dev`[39m
+
+
+Execution Time (2016-10-28 21:38:48 UTC-2)
+concurrent:target  58.6s  ███████████████████████████████████████████ 100%
+Total 58.9s
+
+Deseja finalizar o arquivo em lotes (S/N)? 

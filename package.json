@@ -1,0 +1,36 @@
+{
+  "name": "AppRedesSociais",
+  "version": "1.0.0",
+  "description": "App Redes Sociais",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "postinstall": "bower install && grunt deploy"
+  },
+  "dependencies": {
+    "bower": "latest",
+    "load-grunt-config": "latest",
+    "load-grunt-tasks": "latest",
+    "time-grunt": "latest",
+    "jshint-stylish": "latest",
+  	"grunt-contrib-copy": "latest",
+  	"grunt-contrib-watch": "latest",
+    "grunt-concurrent": "latest",
+    "grunt-contrib-jshint": "latest",
+  	"grunt-newer": "latest",
+  	"grunt-jsbeautifier": "latest",
+    "grunt-nodemon": "latest",
+    "express": "latest",
+    "file-system": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leobororo/dinosaur.git"
+  },
+  "author": "Leandro Bororo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leobororo/dinosaur/issues"
+  },
+  "homepage": "https://github.com/leobororo/dinosaur#readme"
+}

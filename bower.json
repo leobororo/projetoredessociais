@@ -1,0 +1,24 @@
+{
+  "name": "AppRedesSociais",
+  "description": "Aplicativo para a disciplina de Redes sociais",
+  "main": "index.js",
+  "authors": [
+    "Leandro Bororo",
+    "Leonardo Ribeiro Silva",
+    "Samuel Chamon"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+      "angular": "1.5.8",
+      "bootstrap": "3.3.7"
+    }
+}

@@ -1,0 +1,17 @@
+.container {
+  text-align: center;
+}
+
+.container-fluid {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.row {
+  text-align: left;
+}
+
+.table {
+  margin-top: 20px;
+  text-align: left;
+}
