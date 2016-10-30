@@ -12,45 +12,77 @@
     <script src="../lib/angular/angular.js"></script>
     <script src="../lib/jquery/jquery.min.js"></script>
     <script src="../js/app.js"></script>
-    <script src="../js/controllers/redesSociaisCtrl.js"></script>
+    <script src="../js/controllers/dadosUsuarioCtrl.js"></script>
+    <script src="../js/controllers/postCtrl.js"></script>
+    <script src="../js/controllers/amigosCtrl.js"></script>
     <script src="../js/services/contatoFacebookAPIService.js"></script>
   </head>
 
-  <body ng-controller="redesSociaisCtrl">
+  <body>
     <div class="container jumbotron">
-      <h1 ng-bind="appName"></h1>
 
-      <div class="container-fluid">
-        <h3>Dados do Usuário</h3>
-        <div class="row">
-          <div class="col-sm-2">ID:</div>
-          <div class="col-sm-10">{{dadosUsuario.id}}</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Nome:</div>
-          <div class="col-sm-10">{{dadosUsuario.nome}}</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Email:</div>
-          <div class="col-sm-10">{{dadosUsuario.email}}</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Cidade:</div>
-          <div class="col-sm-10">{{dadosUsuario.cidade}}</div>
-        </div>
-        <div class="row">
-          <div class="col-sm-2">Genero:</div>
-          <div class="col-sm-10">{{dadosUsuario.genero}}</div>
+      <h1>Aplicativo redes sociais</h1>
+
+      <div ng-controller="dadosUsuarioCtrl">
+        <div class="container-fluid">
+          <h3>Dados do Usuário</h3>
+
+          <div class="row">
+            <div class="col-sm-12"><img class="img-responsive profile-pic" src="{{dadosUsuario.urlPhoto}}"/></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-1">ID:</div>
+            <div class="col-sm-11">{{dadosUsuario.id}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-1">Nome:</div>
+            <div class="col-sm-11">{{dadosUsuario.nome}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-1">Email:</div>
+            <div class="col-sm-11">{{dadosUsuario.email}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-1">Cidade:</div>
+            <div class="col-sm-11">{{dadosUsuario.cidade}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-1">Genero:</div>
+            <div class="col-sm-11">{{dadosUsuario.genero}}</div>
+          </div>
         </div>
       </div>
 
-      <div class="container-fluid">
-        <h3>Lista de amigos</h3>
-        <div class="row" ng-repeat="amigo in amigos">
-          <div class="col-sm-3">Nome</div>
-          <div class="col-sm-3">{{amigo.nome}}</div>
-          <div class="col-sm-3">Idade</div>
-          <div class="col-sm-3">{{amigo.idade}}</div>
+      <div ng-controller="postCtrl">
+        <div class="container-fluid">
+          <h3>Post</h3>
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <textarea class="form-control" rows="5" ng-model="comentario"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-primary" ng-click="post(comentario)">Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ng-controller="amigosCtrl">
+        <div class="container-fluid">
+          <h3>Lista de amigos</h3>
+          <div class="row" ng-repeat="amigo in amigos">
+            <div class="col-sm-3">Nome</div>
+            <div class="col-sm-3">{{amigo.nome}}</div>
+            <div class="col-sm-3">Idade</div>
+            <div class="col-sm-3">{{amigo.idade}}</div>
+          </div>
         </div>
       </div>
     </div>

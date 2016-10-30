@@ -1,5 +1,6 @@
 .container {
   text-align: center;
+  background-color: #d9edf7;
 }
 
 .container-fluid {
@@ -9,9 +10,15 @@
 
 .row {
   text-align: left;
+  margin-top: 10px;
 }
 
 .table {
   margin-top: 20px;
   text-align: left;
+}
+
+.profile-pic {
+  width: 70px;
+  height: 70px;
 }
