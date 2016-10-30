@@ -2,16 +2,19 @@ angular.module("AppRedesSociais").controller("redesSociaisCtrl", function($scope
     $scope.appName = "Aplicativo redes sociais";
     $scope.amigos = contatoFacebookAPIService.getAmigos();
 
-    obterDadosUsuario = function () {
-      contatoFacebookAPIService.getDadosUsuario(function(dadosUsuario) {
-        $scope.$apply(function () {
-          $scope.dadosUsuario = dadosUsuario;
-        });
+    obterDadosUsuario = function() {
+      contatoFacebookAPIService.getDadosUsuario()
+      .then(function(data) {
+        console.log(data);
+        $scope.dadosUsuario = data;
+      },
+      function(error) {
+        console.log("Failed to get data, error: " + error);
       });
     };
 
+
     $(document).ready(function() {
       obterDadosUsuario();
-      console.log($scope.dadosUsuario);
     });
 });
