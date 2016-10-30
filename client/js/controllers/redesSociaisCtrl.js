@@ -9,7 +9,7 @@ angular.module("AppRedesSociais").controller("redesSociaisCtrl", function($scope
         $scope.dadosUsuario = data;
       },
       function(error) {
-        console.log("Failed to get data, error: " + error);
+        console.log("Failed to get dados do usuário, error: " + error);
       });
     };
 
