@@ -10,5 +10,4 @@ angular.module("AppRedesSociais").controller("postCtrl", function($scope, contat
         console.log("Falha ao executar POST feed, error: " + error);
       });
     };
-
 });
