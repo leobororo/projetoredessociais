@@ -138,7 +138,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
             }
           },
           {
-            scope: 'email,user_about_me,user_hometown,publish_actions,friends',
+            scope: 'email,user_about_me,user_hometown,publish_actions',
             return_scopes: true
           });
         }
