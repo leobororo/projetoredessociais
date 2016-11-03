@@ -23,11 +23,16 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
                 console.log("service: " + response.error);
               } else {
 
+                  var cidade = "";
+                  if (response.hometown) {
+                    cidade = response.hometown.name;
+                  }
+
                   var dadosUser = {
                     id: response.id,
                     nome: response.name,
                     email: response.email,
-                    cidade: response.hometown.name,
+                    cidade: cidade,
                     genero: response.gender,
                     urlPhoto: response.picture.data.url
                   }
@@ -89,6 +94,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
     // função para obter os amigos do usuário através da api do facebook
     // caso o usuário esteja logado
     var getAmigos = function(deferred) {
+
       FB.api(
           '/me/friends',
           {
@@ -102,6 +108,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
                 console.log("service amigos: " + response.error);
               } else {
                   var amigos = response.data;
+                  console.log(response);
 
                   // configura os dados que serão recebidos pela função de sucesso
                   deferred.resolve(amigos);
@@ -112,6 +119,43 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
 
     // função que verifica se o usuário está logado e executa o script getAmigos
     runScript(getAmigos, deferred);
+
+    // devolve a promessa de resposta
+    return deferred.promise;
+  };
+
+  // função para obter array de permissoes, a ser implementada
+  var _getPermissoes = function() {
+
+    // cria uma variável do tipo promessa
+    var deferred = $q.defer();
+
+    // função para obter as permissões do usuário através da api do facebook
+    // caso o usuário esteja logado
+    var getPermissoes = function(deferred) {
+
+      /* make the API call */
+      FB.api(
+          "/me/permissions",
+          function(response) {
+              if (!response || response.error) {
+
+                // configura os dados que serão recebidos pela função de erro
+                deferred.reject(response);
+                console.log("service permissoes: " + response.error);
+              } else {
+                  var permissoes = response.data;
+                  console.log(response);
+
+                  // configura os dados que serão recebidos pela função de sucesso
+                  deferred.resolve(permissoes);
+              }
+          }
+      );
+    };
+
+    // função que verifica se o usuário está logado e executa o script getPermissoes
+    runScript(getPermissoes, deferred);
 
     // devolve a promessa de resposta
     return deferred.promise;
@@ -138,7 +182,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
             }
           },
           {
-            scope: 'email,user_about_me,user_hometown,publish_actions',
+            scope: 'email,user_about_me,user_actions.books,user_hometown,publish_actions,user_friends,user_likes,user_birthday',
             return_scopes: true
           });
         }
@@ -150,6 +194,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
   return {
       getDadosUsuario: _obterDadosUsuario,
       post: _post,
+      getPermissoes: _getPermissoes,
       getAmigos: _obterAmigos
   };
 });

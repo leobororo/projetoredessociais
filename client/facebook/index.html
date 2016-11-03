@@ -55,6 +55,11 @@
             <div class="col-sm-1">Genero:</div>
             <div class="col-sm-11">{{dadosUsuario.genero}}</div>
           </div>
+
+          <div class="row">
+            <div class="col-sm-1">Permissões:</div>
+            <div class="col-sm-11"><span ng-repeat="permissao in permissoes">{{permissao.permission}}, </span></div>
+          </div>
         </div>
       </div>
 
@@ -79,9 +84,14 @@
           <h3>Lista de amigos</h3>
           <div class="row" ng-repeat="amigo in amigos">
             <div class="col-sm-3">Nome</div>
-            <div class="col-sm-3">{{amigo.id}}</div>
-            <div class="col-sm-3">Idade</div>
-            <div class="col-sm-3">{{amigo.nome}}</div>
+            <div class="col-sm-3">{{amigo.name}}</div>
+            <div class="col-sm-3">Sexo</div>
+            <div class="col-sm-3">{{amigo.gender}}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <button type="button" class="btn btn-primary" ng-click="carregarListaAmigos()">Buscar amigos</button>
+            </div>
           </div>
         </div>
       </div>
