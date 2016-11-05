@@ -190,11 +190,60 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
     });
   };
 
+
+  // aqui abrimos uma tela de publicação que permite o envio para lista de amigos com imagem e link do google
+  var _postDialog = function(data) {
+
+    // cria uma variável do tipo promessa
+    var deferred = $q.defer();
+
+    var postTimelineUsuarioAmigoDialog= function(deferred){
+      FB.ui(
+        {
+          method: 'feed', //Método para postar no Mural
+          link: 'http://google.com/', //Link a ser compartilhado
+          picture: data //Imagem do Share
+        },
+        function(response) {
+          console.log(response); //Callback da função.
+        }
+      );
+    }
+    runScript(postTimelineUsuarioAmigoDialog, deferred);
+    // devolve a promessa de resposta
+    return deferred.promise;
+    };
+
+    // aqui abrimos uma tela com o link a ser informado pelo usuário digitar eposteriormente
+    // abrir um "Dialog" para envio o mesmo por e-mail;
+    var _sendLink = function(data) {
+
+      // cria uma variável do tipo promessa
+      var deferred = $q.defer();
+
+      var sendUsuarioLink= function(deferred){
+        FB.ui(
+          {
+            method: 'send',
+            link: data,
+          },
+          function(response) {
+            console.log(response); //Callback da função.
+          }
+        );
+      }
+      runScript(sendUsuarioLink, deferred);
+      // devolve a promessa de resposta
+      return deferred.promise;
+      };
+
   // aqui devolvemos um objeto javascript com todos os métodos que precisamos
   return {
       getDadosUsuario: _obterDadosUsuario,
       post: _post,
       getPermissoes: _getPermissoes,
-      getAmigos: _obterAmigos
+      getAmigos: _obterAmigos,
+      postDialog : _postDialog,
+      sendLink : _sendLink
   };
 });
