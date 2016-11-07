@@ -192,12 +192,12 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
 
 
   // aqui abrimos uma tela de publicação que permite o envio para lista de amigos com imagem e link do google
-  var _postDialog = function(data) {
+  var _feedDialog = function(data) {
 
     // cria uma variável do tipo promessa
     var deferred = $q.defer();
 
-    var postTimelineUsuarioAmigoDialog= function(deferred){
+    var postTimelineUsuarioAmigoFeed= function(deferred){
       FB.ui(
         {
           method: 'feed', //Método para postar no Mural
@@ -209,19 +209,19 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
         }
       );
     }
-    runScript(postTimelineUsuarioAmigoDialog, deferred);
+    runScript(postTimelineUsuarioAmigoFeed, deferred);
     // devolve a promessa de resposta
     return deferred.promise;
     };
 
-    // aqui abrimos uma tela com o link a ser informado pelo usuário digitar eposteriormente
-    // abrir um "Dialog" para envio o mesmo por e-mail;
-    var _sendLink = function(data) {
+
+    // função para envio de mensagem  de link par amigos ou individual  VIA Dialog.
+    var _sendDialog = function(data) {
 
       // cria uma variável do tipo promessa
       var deferred = $q.defer();
 
-      var sendUsuarioLink= function(deferred){
+      var sendUsuarioMensagemPrivateMessage= function(deferred){
         FB.ui(
           {
             method: 'send',
@@ -232,10 +232,37 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
           }
         );
       }
-      runScript(sendUsuarioLink, deferred);
+      runScript(sendUsuarioMensagemPrivateMessage, deferred);
       // devolve a promessa de resposta
       return deferred.promise;
       };
+
+      // função para postar na timeline permite que as pessoas publiquem uma história
+      //individual na própria Linha do Tempo, na Linha do Tempo de um amigo, em um grupo
+      //ou em uma mensagem privada no Messenger.
+      //Não requer o Login no Facebook ou qualquer outra permissão estendida,
+      //portanto é a maneira mais fácil de habilitar o compartilhamento na Web.
+      var _shareDialog = function(data) {
+
+        // cria uma variável do tipo promessa
+        var deferred = $q.defer();
+
+        var postTimelineUsuarioAmigoShare= function(deferred){
+          FB.ui(
+            {
+              method: 'share',
+               href: data,
+            },
+            function(response) {
+              console.log(response); //Callback da função.
+            }
+          );
+        }
+        runScript(postTimelineUsuarioAmigoShare, deferred);
+        // devolve a promessa de resposta
+        return deferred.promise;
+        };
+
 
   // aqui devolvemos um objeto javascript com todos os métodos que precisamos
   return {
@@ -243,7 +270,8 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
       post: _post,
       getPermissoes: _getPermissoes,
       getAmigos: _obterAmigos,
-      postDialog : _postDialog,
-      sendLink : _sendLink
+      feedDialog : _feedDialog,
+      sendDialog : _sendDialog,
+      shareDialog: _shareDialog
   };
 });

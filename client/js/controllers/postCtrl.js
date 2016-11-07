@@ -12,8 +12,8 @@ angular.module("AppRedesSociais").controller("postCtrl", function($scope, contat
     };
 
     // disponibiliza no $scope a função para postLink
-    $scope.postDialog = function() {
-      contatoFacebookAPIService.postDialog()
+    $scope.feedDialog = function() {
+      contatoFacebookAPIService.feedDialog()
       .then(function(data) {
         console.log("POST no feed executado com sucesso");
       },
@@ -21,9 +21,19 @@ angular.module("AppRedesSociais").controller("postCtrl", function($scope, contat
         console.log("Falha ao executar POST feed, error: " + error);
       });
     };
-
-    $scope.sendLink = function(data) {
-      contatoFacebookAPIService.sendLink(data)
+  // disponibiliza no $scope a função para postLink
+    $scope.sendDialog = function(data) {
+      contatoFacebookAPIService.sendDialog(data)
+      .then(function(data) {
+        console.log("POST no feed executado com sucesso");
+      },
+      function(error) {
+        console.log("Falha ao executar POST feed, error: " + error);
+      });
+    };
+  // disponibiliza no $scope a função para postLink
+    $scope.shareDialog = function(data) {
+      contatoFacebookAPIService.shareDialog(data)
       .then(function(data) {
         console.log("POST no feed executado com sucesso");
       },
