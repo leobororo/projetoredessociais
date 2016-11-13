@@ -1,8 +1,43 @@
 angular.module("AppRedesSociais").controller("postCtrl", function($scope, contatoFacebookAPIService) {
 
+    // ontém a lista de amigos através do serviço da API do facebook
+    contatoFacebookAPIService.getAmigos()
+    .then(function(data) {
+      $scope.amigosPost = data;
+      $scope.amigosCompartilhar = data;
+      console.log("GET dados dos amigos executado com sucesso");
+    }, function(error) {
+      console.log("Falha ao executar GET amigos, error: " + error);
+    });
+
+    var obterListaAmigosSelecionados = function(amigos) {
+      function getConcat(concat, amigo) {
+        var id = "";
+
+        function isString (obj) {
+          return (Object.prototype.toString.call(obj) === '[object String]');
+        }
+
+        if (amigo.selecionado) {
+          id = amigo.id;
+        }
+
+        if (isString(concat)) {
+            return concat + "," + id;
+        } else {
+            return id;
+        }
+      };
+
+      return amigos.reduce(getConcat);
+    }
+
     // disponibiliza no $scope a função para post
-    $scope.post = function(data) {
-      contatoFacebookAPIService.post(data)
+    $scope.post = function(data, amigos) {
+
+      var amigosSelecionados = obterListaAmigosSelecionados(amigos);
+
+      contatoFacebookAPIService.post(data, amigosSelecionados)
       .then(function(data) {
         console.log("POST no feed executado com sucesso");
       },
@@ -22,8 +57,8 @@ angular.module("AppRedesSociais").controller("postCtrl", function($scope, contat
       });
     };
   // disponibiliza no $scope a função para postLink
-    $scope.sendDialog = function(data) {
-      contatoFacebookAPIService.sendDialog(data)
+    $scope.sendDialog = function(data, idAmigo) {
+      contatoFacebookAPIService.sendDialog(data, idAmigo)
       .then(function(data) {
         console.log("POST no feed executado com sucesso");
       },

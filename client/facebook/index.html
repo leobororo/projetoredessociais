@@ -64,41 +64,87 @@
       </div>
 
       <div ng-controller="postCtrl">
+
         <div class="container-fluid">
-          <h3>Post</h3>
-          <div class="row">
-            <div class="form-group col-sm-12">
-              <textarea class="form-control post-area" rows="5" ng-model="comentario"></textarea>
+          <fieldset>
+            <legend>Postar mensagem e marcar amigos</legend>
+            <h5>Escreva o texto que deseja postar:</h5>
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <textarea class="form-control post-area" rows="5" ng-model="comentario"></textarea>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <button type="button" class="btn btn-primary" ng-click="post(comentario)">Post</button>
-              <button type="button" class="btn btn-primary" ng-click="feedDialog(comentario)">Feed</button>
-              <button type="button" class="btn btn-primary" ng-click="sendDialog(comentario)">Send</button>
-              <button type="button" class="btn btn-primary" ng-click="shareDialog(comentario)">Share</button>
+            <h5>Marque amigos que utilizam o aplicativo:</h5>
+            <table class="table table-stripped">
+              <tr>
+                <th>
+
+                </th>
+                <th>
+                  Nome
+                </th>
+                <th>
+                  Sexo
+                </th>
+              </tr>
+              <tr ng-class="{selecionado: amigo.selecionado}" ng-repeat="amigo in amigosPost">
+                <td>
+                  <input type="checkbox" ng-model="amigo.selecionado">
+                </td>
+                <td>
+                  {{amigo.name}}
+                </td>
+                <td>
+                  {{amigo.gender}}
+                </td>
+              </tr>
+            </table>
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" ng-click="post(comentario, amigosPost)">Postar</button>
+              </div>
             </div>
-          </div>
+        </fieldset>
+        </div>
+
+        <div class="container-fluid">
+          <fieldset>
+            <legend>Enviar URL</legend>
+            <h5>Escreva uma URL para enviar por mensagem para um amigo:</h5>
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <input type="text" class="form-control" ng-model="urlEnviar"></input>
+              </div>
+            </div>
+            <h5>Escolha um amigo que utiliza o aplicativo:</h5>
+            <select class="form-control" ng-model="idAmigo" ng-options="amigo.id as amigo.name for amigo in amigosPost" style="width:50%">
+              <option value="">Escolha um amigo</option>
+            </select>
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" ng-click="sendDialog(urlEnviar, idAmigo)">Enviar</button>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="container-fluid">
+          <fieldset class="form-group fieldset">
+            <legend>Compartilhar uma URL</legend>
+            <h5>Escreva uma URL para compartilhar:</h5>
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <input type="text" class="form-control" ng-model="urlShare"></input>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <button type="button" class="btn btn-primary" ng-click="shareDialog(urlShare)">Compartilhar</button>
+              </div>
+            </div>
+          </fieldset>
         </div>
       </div>
-
-      <div ng-controller="amigosCtrl">
-        <div class="container-fluid">
-          <h3>Lista de amigos</h3>
-          <div class="row" ng-repeat="amigo in amigos">
-            <div class="col-sm-3">Nome</div>
-            <div class="col-sm-3">{{amigo.name}}</div>
-            <div class="col-sm-3">Sexo</div>
-            <div class="col-sm-3">{{amigo.gender}}</div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <button type="button" class="btn btn-primary" ng-click="carregarListaAmigos()">Buscar amigos</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </body>
 </html>

@@ -52,7 +52,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
   };
 
   // declara uma função para fazer o post dos dados passados como parâmetro
-  var _post = function(data) {
+  var _post = function(data, idsAmigos) {
 
     // cria uma variável do tipo promessa
     var deferred = $q.defer();
@@ -64,7 +64,8 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
             "/me/feed",
             "POST",
             {
-                "message": data
+                "message": data,
+                "tags": idsAmigos
             },
             function (response) {
               if (!response || response.error) {
@@ -216,7 +217,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
 
 
     // função para envio de mensagem  de link par amigos ou individual  VIA Dialog.
-    var _sendDialog = function(data) {
+    var _sendDialog = function(data, id) {
 
       // cria uma variável do tipo promessa
       var deferred = $q.defer();
@@ -226,6 +227,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
           {
             method: 'send',
             link: data,
+            to: id
           },
           function(response) {
             console.log(response); //Callback da função.
@@ -251,7 +253,7 @@ angular.module("AppRedesSociais").factory("contatoFacebookAPIService", function(
           FB.ui(
             {
               method: 'share',
-               href: data,
+              href: data
             },
             function(response) {
               console.log(response); //Callback da função.
