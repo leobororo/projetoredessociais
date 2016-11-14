@@ -40,6 +40,9 @@ angular.module("AppRedesSociais").controller("postCtrl", function($scope, contat
       contatoFacebookAPIService.post(data, amigosSelecionados)
       .then(function(data) {
         console.log("POST no feed executado com sucesso");
+
+        delete $scope.comentario;
+        $scope.postForm.$setPristine();
       },
       function(error) {
         console.log("Falha ao executar POST feed, error: " + error);
@@ -47,17 +50,12 @@ angular.module("AppRedesSociais").controller("postCtrl", function($scope, contat
     };
 
     // disponibiliza no $scope a função para postLink
-    $scope.feedDialog = function() {
-      contatoFacebookAPIService.feedDialog()
-      .then(function(data) {
-        console.log("POST no feed executado com sucesso");
-      },
-      function(error) {
-        console.log("Falha ao executar POST feed, error: " + error);
-      });
-    };
-  // disponibiliza no $scope a função para postLink
     $scope.sendDialog = function(data, idAmigo) {
+
+      $scope.urlEnviar = "";
+      $scope.idAmigo = "";
+      $scope.sendForm.$setPristine();
+
       contatoFacebookAPIService.sendDialog(data, idAmigo)
       .then(function(data) {
         console.log("POST no feed executado com sucesso");
@@ -66,8 +64,13 @@ angular.module("AppRedesSociais").controller("postCtrl", function($scope, contat
         console.log("Falha ao executar POST feed, error: " + error);
       });
     };
-  // disponibiliza no $scope a função para postLink
+
+    // disponibiliza no $scope a função para postLink
     $scope.shareDialog = function(data) {
+
+      $scope.urlShare = "";
+      $scope.shareForm.$setPristine();
+
       contatoFacebookAPIService.shareDialog(data)
       .then(function(data) {
         console.log("POST no feed executado com sucesso");

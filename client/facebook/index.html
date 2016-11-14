@@ -66,60 +66,71 @@
       <div ng-controller="postCtrl">
 
         <div class="container-fluid">
-          <fieldset>
-            <legend>Postar mensagem e marcar amigos</legend>
-            <h5>Escreva o texto que deseja postar:</h5>
-            <div class="row">
-              <div class="form-group col-sm-12">
-                <textarea class="form-control post-area" rows="5" ng-model="comentario"></textarea>
+            <fieldset>
+              <legend>Postar mensagem e marcar amigos</legend>
+              <h5>Escreva o texto que deseja postar:</h5>
+              <form name="postForm">
+                <div class="row">
+                  <div class="form-group col-sm-12">
+                    <textarea class="form-control post-area" rows="5" ng-model="comentario" ng-required="true"></textarea>
+                  </div>
+                </div>
+              </form>
+              <h5>Marque amigos que utilizam o aplicativo:</h5>
+              <table class="table table-stripped">
+                <tr>
+                  <th></th>
+                  <th>
+                    Nome
+                  </th>
+                  <th>
+                    Sexo
+                  </th>
+                </tr>
+                <tr ng-class="{selecionado: amigo.selecionado}" ng-repeat="amigo in amigosPost">
+                  <td>
+                    <input type="checkbox" ng-model="amigo.selecionado">
+                  </td>
+                  <td>
+                    {{amigo.name}}
+                  </td>
+                  <td>
+                    {{amigo.gender}}
+                  </td>
+                </tr>
+              </table>
+              <div ng-show="postForm.$invalid && postForm.$dirty" class="alert alert-danger">
+                Por favor, preencha o campo de comentário
               </div>
-            </div>
-            <h5>Marque amigos que utilizam o aplicativo:</h5>
-            <table class="table table-stripped">
-              <tr>
-                <th>
-
-                </th>
-                <th>
-                  Nome
-                </th>
-                <th>
-                  Sexo
-                </th>
-              </tr>
-              <tr ng-class="{selecionado: amigo.selecionado}" ng-repeat="amigo in amigosPost">
-                <td>
-                  <input type="checkbox" ng-model="amigo.selecionado">
-                </td>
-                <td>
-                  {{amigo.name}}
-                </td>
-                <td>
-                  {{amigo.gender}}
-                </td>
-              </tr>
-            </table>
-            <div class="row">
-              <div class="col-sm-12">
-                <button type="button" class="btn btn-primary" ng-click="post(comentario, amigosPost)">Postar</button>
+              <div class="row">
+                <div class="col-sm-12">
+                  <button type="button" class="btn btn-primary" ng-click="post(comentario, amigosPost)">Postar</button>
+                </div>
               </div>
-            </div>
-        </fieldset>
+            </fieldset>
         </div>
 
         <div class="container-fluid">
           <fieldset>
             <legend>Enviar URL</legend>
-            <h5>Escreva uma URL para enviar por mensagem para um amigo:</h5>
-            <div class="row">
-              <div class="form-group col-sm-12">
-                <input type="text" class="form-control" ng-model="urlEnviar"></input>
+            <form name="sendForm">
+              <h5>Escreva uma URL para enviar por mensagem para um amigo:</h5>
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <input type="text" class="form-control" name="enviar" ng-model="urlEnviar" ng-required="true"></input>
+                </div>
               </div>
+              <h5>Escolha um amigo que utiliza o aplicativo:</h5>
+              <select class="form-control" ng-model="idAmigo" name="id" ng-options="amigo.id as amigo.name for amigo in amigosPost" style="width:50%" ng-required="true">
+                <option value="">Escolha um amigo</option>
+              </select>
+            </form>
+            <div ng-show="sendForm.enviar.$invalid && sendForm.enviar.$dirty" class="alert alert-danger">
+              Por favor, preencha a URL que deseja enviar
             </div>
-            <h5>Escolha um amigo que utiliza o aplicativo:</h5>
-            <select class="form-control" ng-model="idAmigo" ng-options="amigo.id as amigo.name for amigo in amigosPost" style="width:50%">
-              <option value="">Escolha um amigo</option>
-            </select>
+            <div ng-show="sendForm.id.$invalid && sendForm.id.$dirty" class="alert alert-danger">
+              Por favor, escolha um amigo para enviar a mensagem
+            </div>
             <div class="row">
               <div class="col-sm-12">
                 <button type="button" class="btn btn-primary" ng-click="sendDialog(urlEnviar, idAmigo)">Enviar</button>
@@ -132,10 +143,15 @@
           <fieldset class="form-group fieldset">
             <legend>Compartilhar uma URL</legend>
             <h5>Escreva uma URL para compartilhar:</h5>
-            <div class="row">
-              <div class="form-group col-sm-12">
-                <input type="text" class="form-control" ng-model="urlShare"></input>
+            <form name="shareForm">
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <input type="text" class="form-control" ng-model="urlShare" ng-required="true"></input>
+                </div>
               </div>
+            </form>
+            <div ng-show="shareForm.$invalid && shareForm.$dirty" class="alert alert-danger">
+              Por favor, preencha uma URL para compartilhar
             </div>
             <div class="row">
               <div class="col-sm-12">

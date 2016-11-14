@@ -32,6 +32,11 @@
   background-color: yellow;
 }
 
+.alert{
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
 fieldset {
   padding: 5px;
   margin-top: 10px;
